@@ -24,23 +24,17 @@ public class Triangle {
     public String toString() {return "(" + getX() + "," + getY() + "," + getZ() + ")";}
 
     public void testTriangle() {
-        final Triangle triangle = new Triangle(2, 3, 1);
-        System.out.println(triangle.toString());
+        final Triangle triangle = new Triangle(2, 3, 1); System.out.println(triangle.toString());
     }
 
     public String getRight() {
-        int getRightX = this.getX();
-        int getRightY = this.getY();
-        int getRightZ = this.getZ();
-
-
+        int getRightX = this.getX(); int getRightY = this.getY(); int getRightZ = this.getZ();
 
         if (getRightY % 2 == 0) {
             getRightY = getRightY + 1;
         }
         else {
-            getRightY = getRightY - 1;
-            getRightX = getRightX + 1;
+            getRightY = getRightY - 1; getRightX = getRightX + 1;
         }
 
         if (getRightZ == 0) {
@@ -53,10 +47,8 @@ public class Triangle {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Triangle triangle = (Triangle) o;
-        return x == triangle.x && y == triangle.y && z == triangle.z;
+        if (this == o) return true; if (o == null || getClass() != o.getClass()) return false;
+        Triangle triangle = (Triangle) o; return x == triangle.x && y == triangle.y && z == triangle.z;
     }
 
     @Override
@@ -65,7 +57,6 @@ public class Triangle {
     }
 
     public HashSet<Triangle> hashIsch() {
-        HashSet<Triangle> set = new HashSet<>();
-        return set;
+        HashSet<Triangle> set = new HashSet<>(); return set;
     }
 }
