@@ -1,12 +1,15 @@
 package triangle;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 
 /**
  *
  */
 public class Triangle {
+    List<Integer> triangleList = new ArrayList<>();
     private final int x;
     private final int y;
     private final int z;
@@ -23,26 +26,18 @@ public class Triangle {
 
     public String toString() {return "(" + getX() + "," + getY() + "," + getZ() + ")";}
 
-    public void testTriangle() {
-        final Triangle triangle = new Triangle(2, 3, 1); System.out.println(triangle.toString());
-    }
+    public void testT() {System.out.println(this.toString());}
 
-    public String getRight() {
+    public Triangle getRight() {
+
         int getRightX = this.getX(); int getRightY = this.getY(); int getRightZ = this.getZ();
 
-        if (getRightY % 2 == 0) {
-            getRightY = getRightY + 1;
-        }
-        else {
-            getRightY = getRightY - 1; getRightX = getRightX + 1;
-        }
-
         if (getRightZ == 0) {
-            getRightZ = getRightZ + 1;
+            getRightZ = getRightZ + 1; getRightY = getRightY + 1;
         }
-        else getRightZ = getRightZ - 1;
+        else {getRightZ = getRightZ - 1; getRightX = getRightX + 1; getRightY = getRightY - 1;}
 
-        return ("(" + getRightX + "," + getRightY + "," + getRightZ + ")");
+        return new Triangle(getRightX,getRightY,getRightZ);
     }
 
     @Override
@@ -54,9 +49,5 @@ public class Triangle {
     @Override
     public int hashCode() {
         return Objects.hash(x, y, z);
-    }
-
-    public HashSet<Triangle> hashIsch() {
-        HashSet<Triangle> set = new HashSet<>(); return set;
     }
 }

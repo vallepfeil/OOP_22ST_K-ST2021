@@ -1,11 +1,10 @@
 package triangle;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
-public class CompositeTriangle {
+public class CompositeTriangle<T> implements Iterable<T> {
 
     private final int x;
     private final int y;
@@ -21,45 +20,30 @@ public class CompositeTriangle {
 
     public int getK() {return (k);}
 
-    public String getPeak() {return ("(" + x + "," + y + ")");}
+    public String getPeak() {return ("(" + x + "," + y + "," + 1 + ")");}
 
-//    public String toString() {return "(" + getX() + "," + getY() + "," + getK() + ")";}
-//
-//    public void testCompositeTriangle() {
-//        final CompositeTriangle compositetriangle = new CompositeTriangle(-2, 4, 3);
-//        System.out.println(compositetriangle.toString());
-//    }
-//
-//    public String getRight() {
-//        int getRightX = this.getX(); int getRightY = this.getY(); int getRightZ = this.getK();
-//
-//        if (getRightY % 2 == 0) {
-//            getRightY = getRightY + 1;
-//        }
-//        else {
-//            getRightY = getRightY - 1; getRightX = getRightX + 1;
-//        }
-//
-//        if (getRightZ == 0) {
-//            getRightZ = getRightZ + 1;
-//        }
-//        else getRightZ = getRightZ - 1;
-//
-//        return ("(" + getRightX + "," + getRightY + "," + getRightZ + ")");
-//    }
-//
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true; if (o == null || getClass() != o.getClass()) return false;
-//        CompositeTriangle that = (CompositeTriangle) o; return x == that.x && y == that.y && k == that.k;
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return Objects.hash(x, y, k);
-//    }
-//
-//    public HashSet<Triangle> hashIsch() {
-//        HashSet<Triangle> set = new HashSet<>(); return set;
-//    }
+    public String getCompositeTriangle() {return ("(" + x + "," + y + "," + k + ")");}
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public T iterator() {
+        List<Triangle> ACTUAL = new ArrayList<>(); int x = this.getX(); int y = this.getY() - k + 1; int k = this.k;
+        int z = 1;
+
+        int columnSteps; int rowSteps = k - 1;
+
+        for (int i = 0; i <= rowSteps; i++) {
+            Triangle initT = new Triangle(x, y + i, z); Triangle nextT = initT; columnSteps = 2 * k - (1 + 2 * i);
+            for (int j = 0; j < columnSteps; j++) {
+                ACTUAL.add(nextT); nextT = nextT.getRight();
+            }
+        } return (T) ACTUAL;
+    }
+
+    public boolean contains(Triangle t){
+        for (Triangle triangle : (List<Triangle>)this.iterator()) {
+            return t.equals(triangle);
+        }
+        return false;
+    }
 }
